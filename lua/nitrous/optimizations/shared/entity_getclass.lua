@@ -1,9 +1,10 @@
 local meta = FindMetaTable( "Entity" )
 
 meta.GMN_GetClass = GMN.StoreOriginal( "Entity:GetClass", meta.GetClass )
+local getTable = meta.GetTable
 
 function meta:GetClass()
-    local cached = self:GetTable().GMN_GetClassVar
+    local cached = getTable( self ).GMN_GetClassVar
     if cached then return cached end
 
     local id = self:GMN_GetClass()
