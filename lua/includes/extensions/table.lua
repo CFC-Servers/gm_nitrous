@@ -1,6 +1,11 @@
 local pairs = pairs
 local debug_getmetatable = debug.getmetatable
 local istable = istable
+local isnumber = isnumber
+local isstring = isstring
+local isvector = isvector
+local isangle = isangle
+local isbool = isbool
 local table_Copy
 local table_Empty
 local table_Count
@@ -12,6 +17,8 @@ local setmetatable = setmetatable
 local math_random = math.random
 local table_remove = table.remove
 local table_SortByMember = table.SortByMember
+local table_Sanitise = table.Sanitise
+local IsColor = IsColor
 
 --[[---------------------------------------------------------
 	Name: Inherit( t, base )
@@ -325,7 +332,7 @@ function table.Sanitise( t, done )
     for k, v in pairs( t ) do
         if istable( v ) and not IsColor( v ) and not done[v] then
             done[v] = true
-            tbl[k] = table.Sanitise( v, done )
+            tbl[k] = table_Sanitise( v, done )
         else
             if isvector( v ) then
                 local x, y, z = v.x, v.y, v.z
@@ -404,6 +411,7 @@ function table.Sanitise( t, done )
 
     return tbl
 end
+table_Sanitise = table.Sanitise
 
 --[[---------------------------------------------------------
 	Name: table.DeSanitise( table )
