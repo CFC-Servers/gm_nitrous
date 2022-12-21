@@ -152,3 +152,11 @@ hook.Add( "PostDrawEffects", "RenderHalos", function()
 
     List = {}
 end )
+
+hook.Add( "PreGamemodeLoaded", "GMN_SetHaloLocals", function()
+    table_IsEmpty = table.IsEmpty
+    render_BlurRenderTarget = render.BlurRenderTarget
+    cam_Start3D = cam.Start3D
+    cam_Start2D = cam.Start2D
+    hook.Remove( "PreGamemodeLoaded", "GMN_SetHaloLocals" )
+end )
