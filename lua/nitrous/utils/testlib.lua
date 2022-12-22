@@ -1,7 +1,7 @@
 local SysTime = SysTime
 
 function GMN.RunTest( func, count )
-    count = count or 100000
+    count = count or 1000000
 
     local startTime = SysTime()
 
@@ -17,6 +17,8 @@ function GMN.RunTest( func, count )
 end
 
 function GMN.TestCompare( func1, func2, count )
+    count = count or 1000000
+
     local jitstatus = jit.status()
 
     print( "[GMN] Starting test.." )
@@ -61,6 +63,6 @@ function GMN.TestCompare( func1, func2, count )
     if averageTime3 > averageTime4 then
         print( "JIT OFF 2 is " .. math.Round( ( averageTime3 / averageTime4 ) * 100 - 100, 3 ) .. "% faster than test 1" )
     else
-        print( "JIT OFF 2 is " .. math.Round( ( averageTime4 / averageTime3 ) * 100 - 100, 3 ) .. "% faster than test 2" )
+        print( "JIT OFF 1 is " .. math.Round( ( averageTime4 / averageTime3 ) * 100 - 100, 3 ) .. "% faster than test 2" )
     end
 end
