@@ -7,13 +7,13 @@ function CurTime()
 end
 
 if SERVER then
-    hook.Add( "Think", "GMN_CurTime", function()
+    hook.Add( "Tick", "GMN_CurTime", function()
         time = CurTime_()
     end )
 end
 
 if CLIENT then
-    hook.Add( "CalcView", "GMN_CurTime", function()
+    hook.Add( "Tick", "GMN_CurTime", function()
         time = CurTime_()
     end )
 end
