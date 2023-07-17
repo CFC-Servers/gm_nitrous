@@ -14,17 +14,8 @@ local function getGeys( tbl )
     return keys
 end
 
-local function getKeyValues( tbl )
-    local keyValues = {}
-
-    for k, v in pairs( tbl ) do
-        table_insert( keyValues, { k, v } )
-    end
-
-    return keyValues
-end
-
-function GMN.SortedPairs( tbl, desc )
+GMN.StoreOriginal( "SortedPairs", SortedPairs )
+function SortedPairs( tbl, desc )
     local keys = getGeys( tbl )
 
     if desc then
@@ -41,27 +32,5 @@ function GMN.SortedPairs( tbl, desc )
     return function()
         i, key = next( keys, i )
         return key, rawget( tbl, key )
-    end
-end
-
-function GMN.SortedPairsByValue( tbl, desc )
-    local keyValues = getKeyValues( tbl )
-
-    if desc then
-        table_sort( keyValues, function( a, b )
-            return a[2] > b[2]
-        end )
-    else
-        table_sort( keyValues, function( a, b )
-            return a[2] < b[2]
-        end )
-    end
-
-    local i, keyValue
-    return function()
-        i, keyValue = next( keyValues, i )
-        if not keyValue then return end
-
-        return keyValue[1], keyValue[2]
     end
 end
