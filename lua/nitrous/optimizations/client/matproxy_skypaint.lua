@@ -5,13 +5,13 @@ local SetFloat = matMeta.SetFloat
 local SetInt = matMeta.SetInt
 local SetTexture = matMeta.SetTexture
 
-local skyPaint
+local init = function() end
 
-local init = function()
-    skyPaint = g_SkyPaint
-end
-
+local IsValid = IsValid
 local bind = function( _, mat )
+    local skyPaint = g_SkyPaint
+    if not IsValid( skyPaint ) then return end
+
     local values = skyPaint:GetNetworkVars()
 
     SetVector( mat, "$TOPCOLOR", values.TopColor )
