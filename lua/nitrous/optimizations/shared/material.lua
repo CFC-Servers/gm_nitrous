@@ -3,12 +3,12 @@ local Material_ = GMN.StoreOriginal( "Material", Material )
 local cache = {}
 
 function Material( name, params )
-    if params then return Material_( name, params ) end
+    local key = name .. (params or "")
 
-    local cached = cache[name]
+    local cached = cache[key]
     if cached then return cached end
 
-    cached = Material_( name )
-    cache[name] = cached
+    cached = Material_( name, params )
+    cache[key] = cached
     return cached
 end
