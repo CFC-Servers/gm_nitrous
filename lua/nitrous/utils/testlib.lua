@@ -1,3 +1,4 @@
+GMN = GMN or {}
 local SysTime = SysTime
 
 function GMN.RunTest( func, count )
