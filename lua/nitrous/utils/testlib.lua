@@ -7,10 +7,6 @@ function GMN.NiceSize( byteSize )
         byteSize = -byteSize
     end
 
-    if byteSize < 1024 then
-        return ( negative and "-" or "" ) .. byteSize .. " B"
-    end
-
     local kb = byteSize / 1024
     if kb < 1024 then
         return ( negative and "-" or "" ) .. math.Round( kb ) .. " KB"
@@ -67,10 +63,10 @@ function GMN.TestCompare( func1, func2, count )
         jit.off()
     end
 
-    print( "1 JIT ON took " .. totalTime1 .. " seconds to run " .. count .. " times, average: " .. averageTime1 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage1 ) )
-    print( "2 JIT ON took " .. totalTime2 .. " seconds to run " .. count .. " times, average: " .. averageTime2 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage2 ) )
-    print( "1 JIT OFF took " .. totalTime3 .. " seconds to run " .. count .. " times, average: " .. averageTime3 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage3 ) )
-    print( "2 JIT OFF took " .. totalTime4 .. " seconds to run " .. count .. " times, average: " .. averageTime4 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage4 ) )
+    print( "1 JIT ON took " .. totalTime1 .. " seconds to run " .. count .. " times, average: " .. averageTime1 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage1 * 1024 ) )
+    print( "2 JIT ON took " .. totalTime2 .. " seconds to run " .. count .. " times, average: " .. averageTime2 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage2 * 1024 ) )
+    print( "1 JIT OFF took " .. totalTime3 .. " seconds to run " .. count .. " times, average: " .. averageTime3 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage3 * 1024 ) )
+    print( "2 JIT OFF took " .. totalTime4 .. " seconds to run " .. count .. " times, average: " .. averageTime4 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage4 * 1024 ) )
 
     if averageTime1 > averageTime2 then
         print( "JIT ON 2 is " .. math.Round( ( averageTime1 / averageTime2 ) * 100 - 100, 3 ) .. "% faster than test 1" )
@@ -85,10 +81,10 @@ function GMN.TestCompare( func1, func2, count )
     end
 
     if garbage1 ~= garbage2 then
-        print( "JIT ON tests produced different garbage amounts: " .. GMN.NiceSize( garbage1 ) .. " vs " .. GMN.NiceSize( garbage2 ) )
+        print( "JIT ON tests produced different garbage amounts: " .. GMN.NiceSize( garbage1 * 1024 ) .. " vs " .. GMN.NiceSize( garbage2 * 1024 ) )
     end
 
     if garbage3 ~= garbage4 then
-        print( "JIT OFF tests produced different garbage amounts: " .. GMN.NiceSize( garbage3 ) .. " vs " .. GMN.NiceSize( garbage4 ) )
+        print( "JIT OFF tests produced different garbage amounts: " .. GMN.NiceSize( garbage3 * 1024 ) .. " vs " .. GMN.NiceSize( garbage4 * 1024 ) )
     end
 end
