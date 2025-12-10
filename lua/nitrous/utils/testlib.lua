@@ -63,10 +63,11 @@ function GMN.TestCompare( func1, func2, count )
         jit.off()
     end
 
-    print( "1 JIT ON took " .. totalTime1 .. " seconds to run " .. count .. " times, average: " .. averageTime1 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage1 * 1024 ) )
-    print( "2 JIT ON took " .. totalTime2 .. " seconds to run " .. count .. " times, average: " .. averageTime2 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage2 * 1024 ) )
-    print( "1 JIT OFF took " .. totalTime3 .. " seconds to run " .. count .. " times, average: " .. averageTime3 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage3 * 1024 ) )
-    print( "2 JIT OFF took " .. totalTime4 .. " seconds to run " .. count .. " times, average: " .. averageTime4 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage4 * 1024 ) )
+    print( "Ran " .. count .. " iterations of each test." )
+    print( "1 JIT ON took " .. totalTime1 .. " seconds, average: " .. averageTime1 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage1 * 1024 ) )
+    print( "2 JIT ON took " .. totalTime2 .. " seconds, average: " .. averageTime2 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage2 * 1024 ) )
+    print( "1 JIT OFF took " .. totalTime3 .. " seconds, average: " .. averageTime3 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage3 * 1024 ) )
+    print( "2 JIT OFF took " .. totalTime4 .. " seconds, average: " .. averageTime4 .. " seconds, garbage collected: " .. GMN.NiceSize( garbage4 * 1024 ) )
 
     if averageTime1 > averageTime2 then
         print( "JIT ON 2 is " .. math.Round( ( averageTime1 / averageTime2 ) * 100 - 100, 3 ) .. "% faster than test 1" )
